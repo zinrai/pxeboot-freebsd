@@ -1,0 +1,20 @@
+# DHCP logging for debugging
+log-dhcp
+
+# Client architecture detection
+dhcp-match=set:bios,option:client-arch,0
+dhcp-match=set:uefi,option:client-arch,7
+dhcp-match=set:uefi64,option:client-arch,9
+
+# PXE Service definitions (required for UEFI/OVMF)
+pxe-service=tag:bios,x86PC,"FreeBSD BIOS Boot",boot/pxeboot
+pxe-service=tag:uefi,BC_EFI,"FreeBSD UEFI Boot",boot/loader.efi
+pxe-service=tag:uefi64,X86-64_EFI,"FreeBSD UEFI X64 Boot",boot/loader.efi
+
+# Boot file assignment (for compatibility)
+dhcp-boot=tag:bios,boot/pxeboot
+dhcp-boot=tag:uefi,boot/loader.efi
+dhcp-boot=tag:uefi64,boot/loader.efi
+
+# NFS root path (Option 17) - sent to all clients
+dhcp-option=option:root-path,{{ pxe_server_ip }}:{{ nfs.root_path }}

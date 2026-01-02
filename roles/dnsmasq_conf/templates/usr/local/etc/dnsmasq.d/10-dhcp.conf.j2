@@ -1,0 +1,3 @@
+dhcp-range={{ dnsmasq.dhcp_range_start }},{{ dnsmasq.dhcp_range_end }},{{ dnsmasq.dhcp_netmask }},{{ dnsmasq.dhcp_lease_time }}
+dhcp-option=option:router,{{ dnsmasq.dhcp_gateway }}
+dhcp-authoritative

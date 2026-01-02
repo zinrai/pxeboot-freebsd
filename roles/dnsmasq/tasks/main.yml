@@ -1,0 +1,7 @@
+---
+- name: Install dnsmasq
+  ansible.builtin.package:
+    name: dnsmasq
+    state: present
+  tags:
+    - dnsmasq

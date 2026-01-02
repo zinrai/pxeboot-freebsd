@@ -1,0 +1,38 @@
+---
+- name: Create tftpboot directory
+  ansible.builtin.file:
+    path: "{{ tftpboot_dir }}"
+    owner: root
+    group: wheel
+    mode: '0755'
+    state: directory
+  tags:
+    - pxeboot_conf
+
+- name: Create tftpboot/boot directory
+  ansible.builtin.file:
+    path: "{{ tftpboot_dir }}/boot"
+    owner: root
+    group: wheel
+    mode: '0755'
+    state: directory
+  tags:
+    - pxeboot_conf
+
+- name: Copy pxeboot to TFTP directory
+  ansible.builtin.copy:
+    src: "{{ nfs.root_path }}/boot/pxeboot"
+    dest: "{{ tftpboot_dir }}/boot/pxeboot"
+    remote_src: true
+    mode: '0644'
+  tags:
+    - pxeboot_conf
+
+- name: Copy loader.efi to TFTP directory
+  ansible.builtin.copy:
+    src: "{{ nfs.root_path }}/boot/loader.efi"
+    dest: "{{ tftpboot_dir }}/boot/loader.efi"
+    remote_src: true
+    mode: '0644'
+  tags:
+    - pxeboot_conf

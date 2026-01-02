@@ -1,0 +1,7 @@
+---
+- hosts: pxeboot_server
+  roles:
+    - nfs_server_conf
+    - freebsd_root_conf
+    - pxeboot_conf
+    - dnsmasq_conf

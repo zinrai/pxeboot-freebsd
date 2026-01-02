@@ -1,0 +1,86 @@
+---
+- name: Create dnsmasq.d directory
+  ansible.builtin.file:
+    path: /usr/local/etc/dnsmasq.d
+    owner: root
+    group: wheel
+    mode: '0755'
+    state: directory
+  tags:
+    - dnsmasq_conf
+
+- name: Configure dnsmasq rc.conf.d
+  ansible.builtin.copy:
+    src: etc/rc.conf.d/dnsmasq
+    dest: /etc/rc.conf.d/dnsmasq
+    owner: root
+    group: wheel
+    mode: '0644'
+  tags:
+    - dnsmasq_conf
+
+- name: Configure dnsmasq.conf.inc
+  ansible.builtin.copy:
+    src: usr/local/etc/dnsmasq.conf.inc
+    dest: /usr/local/etc/dnsmasq.conf.inc
+    owner: root
+    group: wheel
+    mode: '0644'
+  notify: Restart dnsmasq
+  tags:
+    - dnsmasq_conf
+
+- name: Configure dnsmasq interface settings
+  ansible.builtin.template:
+    src: usr/local/etc/dnsmasq.d/00-interface.conf.j2
+    dest: /usr/local/etc/dnsmasq.d/00-interface.conf
+    owner: root
+    group: wheel
+    mode: '0644'
+  notify: Restart dnsmasq
+  tags:
+    - dnsmasq_conf
+
+- name: Configure dnsmasq DNS settings
+  ansible.builtin.template:
+    src: usr/local/etc/dnsmasq.d/01-dns.conf.j2
+    dest: /usr/local/etc/dnsmasq.d/01-dns.conf
+    owner: root
+    group: wheel
+    mode: '0644'
+  notify: Restart dnsmasq
+  tags:
+    - dnsmasq_conf
+
+- name: Configure dnsmasq DHCP settings
+  ansible.builtin.template:
+    src: usr/local/etc/dnsmasq.d/10-dhcp.conf.j2
+    dest: /usr/local/etc/dnsmasq.d/10-dhcp.conf
+    owner: root
+    group: wheel
+    mode: '0644'
+  notify: Restart dnsmasq
+  tags:
+    - dnsmasq_conf
+
+- name: Configure dnsmasq TFTP settings
+  ansible.builtin.template:
+    src: usr/local/etc/dnsmasq.d/20-tftp.conf.j2
+    dest: /usr/local/etc/dnsmasq.d/20-tftp.conf
+    owner: root
+    group: wheel
+    mode: '0644'
+  notify: Restart dnsmasq
+  tags:
+    - dnsmasq_conf
+
+- name: Configure dnsmasq PXE boot settings
+  ansible.builtin.template:
+    src: usr/local/etc/dnsmasq.d/30-pxeboot.conf.j2
+    dest: /usr/local/etc/dnsmasq.d/30-pxeboot.conf
+    owner: root
+    group: wheel
+    mode: '0644'
+  notify: Restart dnsmasq
+  tags:
+    - dnsmasq_conf

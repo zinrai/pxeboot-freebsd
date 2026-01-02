@@ -1,0 +1,10 @@
+---
+- name: Configure NFS server rc.conf.d
+  ansible.builtin.copy:
+    src: etc/rc.conf.d/nfsd
+    dest: /etc/rc.conf.d/nfsd
+    owner: root
+    group: wheel
+    mode: '0644'
+  tags:
+    - nfs_server

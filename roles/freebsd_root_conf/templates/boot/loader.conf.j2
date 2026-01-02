@@ -1,0 +1,6 @@
+# Set current device to NFS for kernel loading
+currdev="nfs:{{ pxe_server_ip }}:{{ nfs.root_path }}"
+
+# NFS root (backup for DHCP option retrieval failure)
+vfs.root.mountfrom="{{ loader_conf.vfs_root_mountfrom_type }}:{{ pxe_server_ip }}:{{ nfs.root_path }}"
+vfs.mountroot.timeout="{{ loader_conf.vfs_mountroot_timeout }}"

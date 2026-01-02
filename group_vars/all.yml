@@ -1,0 +1,28 @@
+---
+dnsmasq:
+  interface: "em0"
+  dhcp_range_start: "192.168.100.100"
+  dhcp_range_end: "192.168.100.200"
+  dhcp_lease_time: "12h"
+  dhcp_gateway: "192.168.100.1"
+  dhcp_netmask: "255.255.255.0"
+
+pxe_server_ip: "192.168.100.1"
+
+tftpboot_dir: "/var/tftpboot"
+
+nfs:
+  root_path: "/data/freebsd_root"
+  export_network: "192.168.100.0/24"
+
+freebsd:
+  version: "14.3-RELEASE"
+  arch: "amd64"
+  base_url: "https://download.freebsd.org/releases/amd64/14.3-RELEASE"
+  archives:
+    - "base.txz"
+    - "kernel.txz"
+
+loader_conf:
+  vfs_root_mountfrom_type: "nfs"
+  vfs_mountroot_timeout: "30"

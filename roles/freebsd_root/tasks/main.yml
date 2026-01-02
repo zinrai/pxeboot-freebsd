@@ -1,0 +1,19 @@
+---
+- name: Create NFS root directory
+  ansible.builtin.file:
+    path: "{{ nfs.root_path }}"
+    owner: root
+    group: wheel
+    mode: '0755'
+    state: directory
+  tags:
+    - freebsd_root
+
+- name: Download and extract FreeBSD archives
+  ansible.builtin.unarchive:
+    src: "{{ freebsd.base_url }}/{{ item }}"
+    dest: "{{ nfs.root_path }}"
+    remote_src: true
+  loop: "{{ freebsd.archives }}"
+  tags:
+    - freebsd_root

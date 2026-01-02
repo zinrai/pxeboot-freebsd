@@ -1,0 +1,2 @@
+dnsmasq_enable="YES"
+dnsmasq_conf="/usr/local/etc/dnsmasq.conf.inc"

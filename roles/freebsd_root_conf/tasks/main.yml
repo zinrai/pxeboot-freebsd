@@ -1,0 +1,10 @@
+---
+- name: Configure loader.conf for NFS root
+  ansible.builtin.template:
+    src: boot/loader.conf.j2
+    dest: "{{ nfs.root_path }}/boot/loader.conf"
+    owner: root
+    group: wheel
+    mode: '0644'
+  tags:
+    - freebsd_root_conf

@@ -1,0 +1,14 @@
+---
+- name: Configure /etc/exports
+  ansible.builtin.template:
+    src: etc/exports.j2
+    dest: /etc/exports
+    owner: root
+    group: wheel
+    mode: '0644'
+  notify:
+    - Restart rpcbind
+    - Restart nfsd
+    - Restart mountd
+  tags:
+    - nfs_server_conf

@@ -1,0 +1,21 @@
+---
+- name: Restart rpcbind
+  ansible.builtin.service:
+    name: rpcbind
+    state: restarted
+  tags:
+    - nfs_server_conf
+
+- name: Restart nfsd
+  ansible.builtin.service:
+    name: nfsd
+    state: restarted
+  tags:
+    - nfs_server_conf
+
+- name: Restart mountd
+  ansible.builtin.service:
+    name: mountd
+    state: restarted
+  tags:
+    - nfs_server_conf
