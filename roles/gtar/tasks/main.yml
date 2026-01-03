@@ -1,0 +1,7 @@
+---
+- name: Install gtar
+  ansible.builtin.package:
+    name: gtar
+    state: present
+  tags:
+    - gtar
